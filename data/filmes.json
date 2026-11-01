@@ -1,5 +1,6 @@
 [
     {
+        "id":1,
         "cidade": "Cascavel",
         "nome": "Street Fighter",
         "classificacao": "14 anos",
@@ -14,6 +15,7 @@
         "uf": "PR"
     },
     {
+        "id":2,
         "cidade": "Cascavel",
         "nome": "O Último Horizonte",
         "classificacao": "12 anos",
@@ -28,6 +30,7 @@
         "uf": "PR"
     },
     {
+        "id":3,
         "cidade": "Cascavel",
         "nome": "Riso Solto",
         "classificacao": "Livre",
@@ -42,6 +45,7 @@
         "uf": "PR"
     },
     {
+        "id":4,
         "cidade": "Toledo",
         "nome": "Noite Sem Fim",
         "classificacao": "16 anos",
@@ -56,6 +60,7 @@
         "uf": "PR"
     },
     {
+        "id":5,
         "cidade": "Cascavel",
         "nome": "Pé de Serra",
         "classificacao": "10 anos",
@@ -70,6 +75,7 @@
         "uf": "PR"
     },
     {
+        "id":6,
         "cidade": "Toledo",
         "nome": "Contos do Amanhã",
         "classificacao": "Livre",
@@ -84,6 +90,7 @@
         "uf": "PR"
     },
     {
+        "id":7,
         "cidade": "Toledo",
         "nome": "Maré Alta",
         "classificacao": "12 anos",
@@ -98,6 +105,7 @@
         "uf": "PR"
     },
     {
+        "id":8,
         "cidade": "Toledo",
         "nome": "Coração de Ferro",
         "classificacao": "14 anos",

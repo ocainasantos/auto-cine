@@ -47,7 +47,7 @@ body {
 .logo {
     flex: none;
     font-family: var(--logo-font);
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 400;
     line-height: 1;
     letter-spacing: 1.6px;
@@ -71,8 +71,8 @@ body {
 
 .search-icon {
     flex: none;
-    width: 25px;
-    height: 25px;
+    width: 18px;
+    height: 18px;
     color: #161618;
 }
 
@@ -179,7 +179,7 @@ body {
     padding: 8px 20px;
     background: var(--bg);
     color: var(--text);
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.4;
 }
 
@@ -191,7 +191,7 @@ body {
     background: transparent;
     color: #cfcfcf;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.4;
     text-align: left;
     cursor: pointer;
@@ -211,7 +211,7 @@ body {
 /* ---------- Carrossel ---------- */
 
 .carrossel-wrapper {
-    margin-top: 40px;
+    margin-top: 25px;
 }
 
 .carrossel {
@@ -334,18 +334,18 @@ body {
 /* ---------- Catálogo ---------- */
 
 .catalogo {
-    padding: 40px 0 80px;
+    padding: 40px 0 60px;
 }
 
-.secao + .secao {
-    margin-top: 58px;
+.secao{
+    margin-top: 45px;
 }
 
 .secao__titulo {
-    margin: 0 0 54px;
+    margin: 0 0 25px;
     color: var(--text);
     font-size: 40px;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.2;
 }
 
@@ -525,7 +525,7 @@ body {
 }
 
 .filme-poster img {
-    width: 100%;
+    width: 96%;
     aspect-ratio: 199/238;
     border-radius: 10px;
     object-fit: cover;
