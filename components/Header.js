@@ -11,7 +11,7 @@ export function Header({ logoHref = "#/", onBusca, filtro } = {}) {
                         <circle cx="9" cy="9" r="7.75"></circle>
                         <line x1="14.6" y1="14.6" x2="23.7" y2="23.7"></line>
                     </svg>
-                    <input class="search-input" type="search" aria-label="Buscar filmes">
+                    <input class="search-input" type="search" aria-label="Buscar filmes" maxlength="50">
                 </form>
                 <nav class="main-nav" aria-label="Menu principal">
                     <a href="#/">Filmes</a>

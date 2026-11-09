@@ -519,7 +519,6 @@ body {
     display: flex;
     flex-direction: column;
     width: 300px;
-    height: 917px;
     gap: 17px;
     flex-shrink: 0;
 }
@@ -573,6 +572,105 @@ body {
     margin: 48px 0;
 }
 
+/* ---------- Ingresso ---------- */
+
+.ingresso__titulo {
+    margin: 0;
+    font-size: 48px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+
+.ingresso__local {
+    margin: 8px 0 48px;
+    color: #cfcfcf;
+    font-size: 24px;
+    letter-spacing: 0.5px;
+}
+
+.ingresso__painel {
+    display: flex;
+    align-items: stretch;
+    gap: 24px;
+    padding: 24px;
+    border-radius: 16px;
+    background: var(--surface);
+}
+
+.ingresso__datas {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.ingresso__data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 96px;
+    height: 96px;
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    background: transparent;
+    color: var(--text);
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.ingresso__data:hover {
+    background: rgba(224, 72, 63, 0.15);
+}
+
+.ingresso__data[aria-pressed="true"] {
+    background: var(--accent);
+}
+
+.ingresso__mes,
+.ingresso__semana {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+
+.ingresso__dia {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+.ingresso__separador {
+    flex: none;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.ingresso__continuar {
+    flex: none;
+    width: 224px;
+    min-height: 96px;
+    padding: 0 24px;
+    border: 0;
+    border-radius: 16px;
+    background: var(--accent);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.ingresso__vazio {
+    margin: 0;
+    align-self: center;
+    color: #cfcfcf;
+}
+
 /* ---------- Footer ---------- */
 
 .site-footer {
@@ -616,6 +714,11 @@ body {
 @media (max-width: 1024px) {
     .filme-titulo-hero { font-size: 48px; }
     .sessoes-grid { grid-template-columns: repeat(2, 1fr); }
+    .ingresso__titulo { font-size: 36px; }
+    .ingresso__local { font-size: 18px; }
+    .ingresso__painel { flex-direction: column; }
+    .ingresso__separador { width: auto; height: 2px; }
+    .ingresso__continuar { width: 100%; min-height: 64px; }
 }
 
 @media (max-width: 760px) {
@@ -625,4 +728,9 @@ body {
     .filme-titulo-hero { font-size: 32px; margin-bottom: 24px; }
     .filme-body { grid-template-columns: 1fr; gap: 32px; }
     .sessoes-grid { grid-template-columns: 1fr; }
+    .ingresso__titulo { font-size: 28px; }
+    .ingresso__painel { padding: 16px; }
+    .ingresso__datas { gap: 12px; }
+    .ingresso__data { width: 80px; height: 80px; }
+    .ingresso__dia { font-size: 28px; }
 }

@@ -28,7 +28,7 @@ function pontuar(filme, query) {
 
 export function filtrar(filmes, cidade, termo) {
     const res = cidade ? filmes.filter(f => f.cidadeUf === cidade) : filmes;
-    const query = normalizar(termo).trim();
+    const query = normalizar(termo).trim().slice(0, 50);
     if (!query) return res;
 
     return res

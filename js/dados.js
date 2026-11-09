@@ -8,6 +8,18 @@ const ESTADOS = {
     SP: "São Paulo", SE: "Sergipe", TO: "Tocantins"
 };
 
+// "mes": "AAAA-MM", "dias": [1, 2, ...]; dias fora do mês são descartados.
+function lerSessoes(sessoes) {
+    const [ano, mes] = String(sessoes?.mes || "").split("-").map(Number);
+    if (!ano || !mes) return [];
+    const ultimoDia = new Date(ano, mes, 0).getDate();
+    return [...new Set(sessoes.dias || [])]
+        .map(Number)
+        .filter(dia => Number.isInteger(dia) && dia >= 1 && dia <= ultimoDia)
+        .sort((a, b) => a - b)
+        .map(dia => new Date(ano, mes - 1, dia));
+}
+
 export class Filme {
     constructor(dados) {
         this.id = Number(dados.id);
@@ -25,6 +37,10 @@ export class Filme {
         const partes = String(dados.cidade || "").split(" - ");
         this.cidade = partes[0].trim();
         this.uf = (dados.uf || partes[1] || "").trim().toUpperCase();
+
+        this.estacionamento = dados.estacionamento || "";
+        this.endereco = dados.endereco || "";
+        this.sessoes = lerSessoes(dados.sessoes);
     }
 
     get cidadeUf() { return this.uf ? `${this.cidade} - ${this.uf}` : this.cidade; }

@@ -1,4 +1,5 @@
 import { criar, deTemplate } from "./dom.js";
+import { Ingresso } from "./Ingresso.js";
 
 const CAMPOS = [
     ["Classificação", "classificacao"],
@@ -41,5 +42,6 @@ export function FilmeDetalhe({ filme }) {
         return li;
     }));
 
+    main.querySelector(".filme-container").append(Ingresso({ filme }));
     return main;
 }
