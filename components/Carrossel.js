@@ -22,7 +22,9 @@ export function Carrossel({ filmes }) {
     const [prevBtn, nextBtn] = raiz.querySelectorAll(".carrossel__nav button");
 
     const slides = filmes.map(filme => {
-        const slide = criar("div", "carrossel__slide");
+        const slide = criar("a", "carrossel__slide");
+        slide.href = `#/filme/${filme.id}`;
+        slide.setAttribute("aria-label", `Ver ${filme.nome}`);
         const tela = criar("div", "carrossel__tela");
         tela.style.backgroundImage = `url("${filme.banner || filme.imageurl || ""}")`;
 
@@ -55,12 +57,25 @@ export function Carrossel({ filmes }) {
         atual = (idx + slides.length) % slides.length;
         slides[atual].classList.add("active");
         dots[atual].classList.add("active");
+        // Só o slide visível recebe foco e é lido por leitores de tela.
+        slides.forEach((slide, i) => {
+            slide.tabIndex = i === atual ? 0 : -1;
+            slide.setAttribute("aria-hidden", String(i !== atual));
+        });
     }
 
     function reiniciar() {
         clearInterval(timer);
-        timer = setInterval(() => { if (raiz.isConnected) irPara(atual + 1); }, INTERVALO);
+        timer = setInterval(() => { if (raiz.isConnected && !pausado) irPara(atual + 1); }, INTERVALO);
     }
+
+    // Pausa a rotação enquanto o usuário está sobre o banner ou com o foco nele.
+    let pausado = false;
+    const carrossel = raiz.querySelector(".carrossel");
+    carrossel.addEventListener("mouseenter", () => { pausado = true; });
+    carrossel.addEventListener("mouseleave", () => { pausado = false; });
+    carrossel.addEventListener("focusin", () => { pausado = true; });
+    carrossel.addEventListener("focusout", e => { if (!carrossel.contains(e.relatedTarget)) pausado = false; });
 
     prevBtn.addEventListener("click", () => { irPara(atual - 1); reiniciar(); });
     nextBtn.addEventListener("click", () => { irPara(atual + 1); reiniciar(); });

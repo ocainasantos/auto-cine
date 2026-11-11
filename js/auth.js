@@ -2,7 +2,8 @@ import { listar, adicionar } from "./repositorio.js";
 
 // Autenticação simulada no navegador: serve para separar as telas, não protege dados de verdade.
 const SESSAO = "autocine:sessao";
-export const GMAIL = /^[a-z0-9._%+-]+@gmail\.com$/i;
+// usuario@dominio.tld, sem espaços; qualquer provedor.
+export const EMAIL = /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/;
 export const SENHA_MINIMA = 8;
 
 async function gerarHash(texto) {
@@ -17,7 +18,7 @@ export async function existeAdmin() {
 export async function cadastrarAdmin({ nome, email, senha }) {
     const emailNormalizado = email.trim().toLowerCase();
     const admins = await listar("admins");
-    if (admins.some(a => a.email === emailNormalizado)) throw new Error("Já existe um admin com este Gmail.");
+    if (admins.some(a => a.email === emailNormalizado)) throw new Error("Já existe um admin com este e-mail.");
     const admin = await adicionar("admins", { nome: nome.trim(), email: emailNormalizado, senha: await gerarHash(senha) });
     return { id: admin.id, nome: admin.nome, email: admin.email };
 }

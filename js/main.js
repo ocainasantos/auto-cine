@@ -54,7 +54,8 @@ async function montarSite(vez) {
     filmes = eventos;
     falhou = Boolean(erro);
     Object.assign(estado, { cidade: "", termo: "" });
-    carrossel = filmes.length ? Carrossel({ filmes: filmes.slice(0, 4) }) : null;
+    const destaques = filmes.filter(f => f.carrossel);
+    carrossel = destaques.length ? Carrossel({ filmes: destaques }) : null;
     app.replaceChildren(
         Header({
             onBusca: termo => atualizar({ termo }),
@@ -114,7 +115,7 @@ async function rotearAdmin(hash, vez) {
     const rota = ROTAS_ADMIN.find(([padrao]) => padrao.test(hash));
     if (!rota) return location.replace("#/admin/painel");
 
-    const tela = await rota[1]();
+    const tela = await rota[1](rota[0].exec(hash));
     if (vez !== navegacao) return;
     document.title = `${rota[2]} — Admin AutoCine`;
     app.replaceChildren(AdminLayout({

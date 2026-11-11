@@ -32,8 +32,28 @@ async function lerArquivo(colecao) {
     }
 }
 
+// Alterações ficam à parte ({ id: campos }) para valerem também sobre os registros do JSON.
+function lerAlteracoes(colecao) {
+    try {
+        const mapa = JSON.parse(localStorage.getItem(`${chave(colecao)}:alteracoes`));
+        return mapa && typeof mapa === "object" ? mapa : {};
+    } catch {
+        return {};
+    }
+}
+
 export async function listar(colecao) {
-    return [...await lerArquivo(colecao), ...lerLocal(colecao)];
+    const alteracoes = lerAlteracoes(colecao);
+    return [...await lerArquivo(colecao), ...lerLocal(colecao)]
+        .map(item => (alteracoes[item.id] ? { ...item, ...alteracoes[item.id], id: item.id } : item));
+}
+
+export async function atualizar(colecao, id, mudancas) {
+    const existe = (await listar(colecao)).some(item => Number(item.id) === Number(id));
+    if (!existe) throw new Error("Registro não encontrado.");
+    const alteracoes = lerAlteracoes(colecao);
+    alteracoes[id] = { ...alteracoes[id], ...mudancas };
+    localStorage.setItem(`${chave(colecao)}:alteracoes`, JSON.stringify(alteracoes));
 }
 
 export async function adicionar(colecao, registro) {

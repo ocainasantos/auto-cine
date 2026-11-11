@@ -3,8 +3,9 @@ import { normalizar } from "../js/busca.js";
 
 let contador = 0;
 
-// colunas: [[rótulo, linha => texto]]. No mobile cada linha vira um cartão (rótulo vem de data-rotulo).
-export function Consulta({ colunas, linhas, rotuloBusca, vazio }) {
+// colunas: [[rótulo, linha => texto | Node, opções?]]. opções.classe vai no <td>;
+// opções.busca = false tira a coluna da busca. No mobile cada linha vira um cartão (rótulo vem de data-rotulo).
+export function Consulta({ colunas, linhas, rotuloBusca, vazio, termoInicial = "", aoBuscar = () => {} }) {
     const id = `consulta-busca-${++contador}`;
     const raiz = criar("div", "consulta");
 
@@ -15,6 +16,7 @@ export function Consulta({ colunas, linhas, rotuloBusca, vazio }) {
     input.id = id;
     input.type = "search";
     input.maxLength = 50;
+    input.value = termoInicial;
     busca.append(label, input);
 
     const total = criar("p", "consulta__total");
@@ -24,8 +26,8 @@ export function Consulta({ colunas, linhas, rotuloBusca, vazio }) {
     const tabela = criar("table", "tabela");
     const thead = criar("thead");
     const cabecalho = criar("tr");
-    cabecalho.append(...colunas.map(([rotulo]) => {
-        const th = criar("th", "", rotulo);
+    cabecalho.append(...colunas.map(([rotulo, , opcoes = {}]) => {
+        const th = criar("th", opcoes.classe || "", rotulo);
         th.scope = "col";
         return th;
     }));
@@ -34,17 +36,23 @@ export function Consulta({ colunas, linhas, rotuloBusca, vazio }) {
     tabela.append(thead, tbody);
     wrapper.append(tabela);
 
-    const textos = linhas.map(linha => colunas.map(([, valor]) => String(valor(linha) ?? "")));
-    const indice = textos.map(celulas => normalizar(celulas.join(" ")));
+    const textoDe = valor => (valor instanceof Node ? valor.textContent : String(valor ?? ""));
+    const indice = linhas.map(linha => normalizar(colunas
+        .filter(([, , opcoes = {}]) => opcoes.busca !== false)
+        .map(([, valor]) => textoDe(valor(linha)))
+        .join(" ")));
 
     function renderizar() {
         const termo = normalizar(input.value).trim();
-        const visiveis = textos.filter((_, i) => !termo || indice[i].includes(termo));
-        tbody.replaceChildren(...visiveis.map(celulas => {
+        const visiveis = linhas.filter((_, i) => !termo || indice[i].includes(termo));
+        tbody.replaceChildren(...visiveis.map(linha => {
             const tr = criar("tr");
-            tr.append(...celulas.map((texto, i) => {
-                const td = criar("td", "", texto);
-                td.dataset.rotulo = colunas[i][0];
+            tr.append(...colunas.map(([rotulo, valor, opcoes = {}]) => {
+                const conteudo = valor(linha);
+                const td = criar("td", opcoes.classe || "");
+                if (conteudo instanceof Node) td.append(conteudo);
+                else td.textContent = String(conteudo ?? "");
+                td.dataset.rotulo = rotulo;
                 return td;
             }));
             return tr;
@@ -59,7 +67,10 @@ export function Consulta({ colunas, linhas, rotuloBusca, vazio }) {
         total.textContent = `${visiveis.length} de ${linhas.length} registro(s)`;
     }
 
-    input.addEventListener("input", renderizar);
+    input.addEventListener("input", () => {
+        aoBuscar(input.value);
+        renderizar();
+    });
     renderizar();
     raiz.append(busca, total, wrapper);
     return raiz;

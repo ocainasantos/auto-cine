@@ -28,10 +28,13 @@ export function AdminLayout({ sessao, rota, conteudo, aoSair }) {
 
     header.querySelector(".admin-usuario__nome").textContent = sessao.nome;
     header.querySelector(".admin-sair").addEventListener("click", aoSair);
+    // Sem link exato (ex.: #/admin/publicados/3/editar), marca o link cuja rota é o início da atual.
+    const atual = LINKS_ADMIN.find(([href]) => href === rota)?.[0]
+        ?? LINKS_ADMIN.find(([href]) => rota.startsWith(`${href}/`))?.[0];
     header.querySelector(".admin-nav__inner").append(...LINKS_ADMIN.map(([href, texto]) => {
         const link = criar("a", "admin-nav__link", texto);
         link.href = href;
-        if (href === rota) link.setAttribute("aria-current", "page");
+        if (href === atual) link.setAttribute("aria-current", "page");
         return link;
     }));
 

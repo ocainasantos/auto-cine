@@ -49,6 +49,8 @@ export class Filme {
         this.endereco = fornecedor.endereco;
         this.cidade = fornecedor.cidade;
         this.uf = String(fornecedor.uf).toUpperCase();
+        this.fornecedorId = Number(fornecedor.id);
+        this.localAtivo = fornecedor.ativo !== false;
 
         this.sessoes = [...new Set(publicacao.datas || [])]
             .map(lerData)
@@ -56,6 +58,8 @@ export class Filme {
             .sort((a, b) => a - b);
         this.horarios = [...new Set(publicacao.horarios || [])].filter(h => HORARIO.test(h)).sort();
         this.vagas = Number.isInteger(publicacao.vagas) && publicacao.vagas > 0 ? publicacao.vagas : null;
+        this.ativo = publicacao.ativo !== false;
+        this.carrossel = publicacao.carrossel === true;
         const valor = Number(publicacao.valor);
         this.ingressos = [
             { tipo: "Inteira", preco: valor },
@@ -68,7 +72,8 @@ export class Filme {
     get local() { return `${this.estacionamento} (${this.endereco}, ${this.cidade}, ${this.uf})`; }
 }
 
-export async function carregarEventos() {
+// O site só recebe eventos ativos em locais ativos; o admin pede incluirInativos para gerenciar todos.
+export async function carregarEventos({ incluirInativos = false } = {}) {
     const [publicacoes, filmes, fornecedores] = await Promise.all([
         listar("publicacoes"), listar("filmes"), listar("fornecedores"),
     ]);
@@ -82,7 +87,8 @@ export async function carregarEventos() {
             fornecedor: fornecedoresPorId.get(Number(publicacao.fornecedorId)),
         }))
         .filter(({ filme, fornecedor }) => filme && fornecedor)
-        .map(partes => new Filme(partes));
+        .map(partes => new Filme(partes))
+        .filter(evento => incluirInativos || (evento.ativo && evento.localAtivo));
 }
 
 // Ingressos vendidos por sessão ("AAAA-MM-DD HH:MM") de um evento.

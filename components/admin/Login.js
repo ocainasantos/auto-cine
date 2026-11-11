@@ -15,7 +15,7 @@ export function Login({ primeiroAcesso, aoEnviar }) {
         : "Informe suas credenciais para entrar.";
 
     const campos = [
-        Campo({ id: "login-email", rotulo: "Gmail", tipo: "email", largo: true, atributos: { maxlength: 100, autocomplete: "username", placeholder: "nome@gmail.com" } }),
+        Campo({ id: "login-email", rotulo: "E-mail", tipo: "email", largo: true, atributos: { maxlength: 100, autocomplete: "username", placeholder: "nome@exemplo.com" } }),
         Campo({ id: "login-senha", rotulo: "Senha", tipo: "password", largo: true, atributos: { maxlength: 64, autocomplete: primeiroAcesso ? "new-password" : "current-password" } }),
     ];
     if (primeiroAcesso) {

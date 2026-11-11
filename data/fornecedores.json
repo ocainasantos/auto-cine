@@ -4,13 +4,15 @@
         "nome": "Estacionamento Y",
         "endereco": "Av. Brasil, 5800 - Centro",
         "cidade": "Cascavel",
-        "uf": "PR"
+        "uf": "PR",
+        "ativo": true
     },
     {
         "id": 2,
         "nome": "Estacionamento X",
         "endereco": "R. Santos Dumont, 2626 - Vila Industrial",
         "cidade": "Toledo",
-        "uf": "PR"
+        "uf": "PR",
+        "ativo": true
     }
 ]

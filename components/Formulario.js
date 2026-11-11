@@ -1,9 +1,12 @@
 import { criar } from "./dom.js";
 
-// Campo com rótulo, ajuda opcional e espaço para a mensagem de erro.
+// Campo com rótulo, ajuda opcional (abaixo do controle, para alinhar campos lado a lado) e mensagem de erro.
 // tag: "input" | "select" | "textarea"; opcoes: [[valor, texto]] para select.
-export function Campo({ id, rotulo, tag = "input", tipo = "text", ajuda, opcoes, largo = false, atributos = {} }) {
-    const raiz = criar("div", largo ? "campo campo--largo" : "campo");
+// largo: ocupa a linha inteira; duplo: ocupa 2 colunas (linha inteira em telas menores).
+export function Campo({ id, rotulo, tag = "input", tipo = "text", ajuda, opcoes, largo = false, duplo = false, atributos = {} }) {
+    const raiz = criar("div", "campo");
+    if (largo) raiz.classList.add("campo--largo");
+    else if (duplo) raiz.classList.add("campo--duplo");
     const label = criar("label", "campo__rotulo", rotulo);
     label.htmlFor = id;
 
@@ -24,7 +27,7 @@ export function Campo({ id, rotulo, tag = "input", tipo = "text", ajuda, opcoes,
     erro.id = `${id}-erro`;
     const descritores = [erro.id];
 
-    raiz.append(label);
+    raiz.append(label, controle);
     if (ajuda) {
         const textoAjuda = criar("p", "campo__ajuda", ajuda);
         textoAjuda.id = `${id}-ajuda`;
@@ -32,7 +35,7 @@ export function Campo({ id, rotulo, tag = "input", tipo = "text", ajuda, opcoes,
         raiz.append(textoAjuda);
     }
     controle.setAttribute("aria-describedby", descritores.join(" "));
-    raiz.append(controle, erro);
+    raiz.append(erro);
     return raiz;
 }
 
