@@ -59,7 +59,7 @@ export function Carrossel({ filmes }) {
 
     function reiniciar() {
         clearInterval(timer);
-        timer = setInterval(() => irPara(atual + 1), INTERVALO);
+        timer = setInterval(() => { if (raiz.isConnected) irPara(atual + 1); }, INTERVALO);
     }
 
     prevBtn.addEventListener("click", () => { irPara(atual - 1); reiniciar(); });

@@ -1,4 +1,6 @@
-const ESTADOS = {
+import { listar, adicionar } from "./repositorio.js";
+
+export const ESTADOS = {
     AC: "Acre", AL: "Alagoas", AP: "Amapá", AM: "Amazonas",
     BA: "Bahia", CE: "Ceará", DF: "Distrito Federal", ES: "Espírito Santo",
     GO: "Goiás", MA: "Maranhão", MT: "Mato Grosso", MS: "Mato Grosso do Sul",
@@ -8,57 +10,115 @@ const ESTADOS = {
     SP: "São Paulo", SE: "Sergipe", TO: "Tocantins"
 };
 
-const HORARIO = /^([01]\d|2[0-3]):[0-5]\d$/;
+export const HORARIO = /^([01]\d|2[0-3]):[0-5]\d$/;
+const DATA_ISO = /^(\d{4})-(\d{2})-(\d{2})$/;
 
-// "mes": "AAAA-MM", "dias": [1, 2, ...]; dias fora do mês são descartados.
-function lerSessoes(sessoes) {
-    const [ano, mes] = String(sessoes?.mes || "").split("-").map(Number);
-    if (!ano || !mes) return [];
-    const ultimoDia = new Date(ano, mes, 0).getDate();
-    return [...new Set(sessoes.dias || [])]
-        .map(Number)
-        .filter(dia => Number.isInteger(dia) && dia >= 1 && dia <= ultimoDia)
-        .sort((a, b) => a - b)
-        .map(dia => new Date(ano, mes - 1, dia));
+export const moeda = valor => Number(valor).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+export function lerData(iso) {
+    const m = DATA_ISO.exec(String(iso));
+    if (!m) return null;
+    const data = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+    return data.getDate() === Number(m[3]) ? data : null;
 }
 
+export function dataIso(data) {
+    const p = n => String(n).padStart(2, "0");
+    return `${data.getFullYear()}-${p(data.getMonth() + 1)}-${p(data.getDate())}`;
+}
+
+export const dataCurta = data => data.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });
+
+// Um evento é uma publicação: filme + fornecedor (local) + datas, horários, valor e vagas.
 export class Filme {
-    constructor(dados) {
-        this.id = Number(dados.id);
-        this.nome = dados.nome;
-        this.classificacao = dados.classificacao;
-        this.genero = dados.genero;
-        this.duracao = dados.duracao;
-        this.datalancamento = dados.datalancamento;
-        this.direcao = dados.direcao || "";
-        this.elenco = dados.elenco;
-        this.sinopse = dados.sinopse;
-        this.imageurl = dados.imageurl;
-        this.banner = dados.banner;
+    constructor({ publicacao, filme, fornecedor }) {
+        this.id = Number(publicacao.id);
+        this.filmeId = Number(filme.id);
+        this.nome = filme.nome;
+        this.classificacao = filme.classificacao;
+        this.genero = filme.genero;
+        this.duracao = filme.duracao;
+        this.datalancamento = filme.datalancamento;
+        this.direcao = filme.direcao || "";
+        this.elenco = filme.elenco;
+        this.sinopse = filme.sinopse;
+        this.imageurl = filme.imageurl;
+        this.banner = filme.banner;
 
-        const partes = String(dados.cidade || "").split(" - ");
-        this.cidade = partes[0].trim();
-        this.uf = (dados.uf || partes[1] || "").trim().toUpperCase();
+        this.estacionamento = fornecedor.nome;
+        this.endereco = fornecedor.endereco;
+        this.cidade = fornecedor.cidade;
+        this.uf = String(fornecedor.uf).toUpperCase();
 
-        this.estacionamento = dados.estacionamento || "";
-        this.endereco = dados.endereco || "";
-        this.sessoes = lerSessoes(dados.sessoes);
-        this.horarios = [...new Set((dados.horarios || []).map(String))]
-            .filter(h => HORARIO.test(h))
-            .sort();
-        this.ingressos = (dados.ingressos || [])
-            .filter(i => i && typeof i.tipo === "string" && i.tipo.trim() && Number.isFinite(Number(i.preco)) && Number(i.preco) >= 0)
-            .map(i => ({ tipo: i.tipo.trim(), preco: Number(i.preco) }));
+        this.sessoes = [...new Set(publicacao.datas || [])]
+            .map(lerData)
+            .filter(Boolean)
+            .sort((a, b) => a - b);
+        this.horarios = [...new Set(publicacao.horarios || [])].filter(h => HORARIO.test(h)).sort();
+        this.vagas = Number.isInteger(publicacao.vagas) && publicacao.vagas > 0 ? publicacao.vagas : null;
+        const valor = Number(publicacao.valor);
+        this.ingressos = [
+            { tipo: "Inteira", preco: valor },
+            { tipo: "Meia-entrada", preco: valor / 2 },
+        ];
     }
 
     get cidadeUf() { return this.uf ? `${this.cidade} - ${this.uf}` : this.cidade; }
     get estado() { return ESTADOS[this.uf] || this.uf || "Outros"; }
+    get local() { return `${this.estacionamento} (${this.endereco}, ${this.cidade}, ${this.uf})`; }
 }
 
-export async function carregarFilmes() {
-    const res = await fetch("data/filmes.json");
-    if (!res.ok) throw new Error(`Falha ao carregar o catálogo: ${res.status}`);
-    return (await res.json()).map(r => new Filme(r));
+export async function carregarEventos() {
+    const [publicacoes, filmes, fornecedores] = await Promise.all([
+        listar("publicacoes"), listar("filmes"), listar("fornecedores"),
+    ]);
+    const porId = lista => new Map(lista.map(item => [Number(item.id), item]));
+    const filmesPorId = porId(filmes);
+    const fornecedoresPorId = porId(fornecedores);
+    return publicacoes
+        .map(publicacao => ({
+            publicacao,
+            filme: filmesPorId.get(Number(publicacao.filmeId)),
+            fornecedor: fornecedoresPorId.get(Number(publicacao.fornecedorId)),
+        }))
+        .filter(({ filme, fornecedor }) => filme && fornecedor)
+        .map(partes => new Filme(partes));
+}
+
+// Ingressos vendidos por sessão ("AAAA-MM-DD HH:MM") de um evento.
+export async function vendidosPorSessao(eventoId) {
+    const vendidos = new Map();
+    (await listar("compras"))
+        .filter(c => Number(c.publicacaoId) === Number(eventoId))
+        .forEach(c => {
+            const sessao = `${c.data} ${c.horario}`;
+            vendidos.set(sessao, (vendidos.get(sessao) || 0) + 1);
+        });
+    return vendidos;
+}
+
+const ALFANUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+// Registra a compra se ainda houver vaga na sessão. Devolve { compra } ou { erro }.
+export async function registrarCompra({ evento, data, horario, ingresso, nome, placa }) {
+    const vendidos = await vendidosPorSessao(evento.id);
+    if (evento.vagas !== null && (vendidos.get(`${dataIso(data)} ${horario}`) || 0) >= evento.vagas) {
+        return { erro: "As vagas deste horário esgotaram. Escolha outro horário." };
+    }
+    const bytes = crypto.getRandomValues(new Uint8Array(6));
+    const compra = await adicionar("compras", {
+        publicacaoId: evento.id,
+        filmeId: evento.filmeId,
+        data: dataIso(data),
+        horario,
+        ingresso: ingresso.tipo,
+        valor: ingresso.preco,
+        nome,
+        placa,
+        codigo: "AC-" + Array.from(bytes, b => ALFANUM[b % ALFANUM.length]).join(""),
+        criadoEm: new Date().toISOString(),
+    });
+    return { compra };
 }
 
 export function agruparPorCidade(filmes) {

@@ -1,4 +1,4 @@
-function normalizar(str) {
+export function normalizar(str) {
     return String(str).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 }
 

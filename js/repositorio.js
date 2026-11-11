@@ -1,0 +1,47 @@
+// Sem backend: cada coleção junta o JSON de data/ (somente leitura) com o que foi
+// cadastrado no navegador, guardado no localStorage.
+const COM_ARQUIVO = new Set(["filmes", "fornecedores", "publicacoes"]);
+const cache = new Map();
+
+function chave(colecao) {
+    return `autocine:${colecao}`;
+}
+
+function lerLocal(colecao) {
+    try {
+        const lista = JSON.parse(localStorage.getItem(chave(colecao)));
+        return Array.isArray(lista) ? lista : [];
+    } catch {
+        return [];
+    }
+}
+
+async function lerArquivo(colecao) {
+    if (!COM_ARQUIVO.has(colecao)) return [];
+    if (!cache.has(colecao)) {
+        cache.set(colecao, fetch(`data/${colecao}.json`).then(res => {
+            if (!res.ok) throw new Error(`Falha ao carregar ${colecao}: ${res.status}`);
+            return res.json();
+        }));
+    }
+    try {
+        return await cache.get(colecao);
+    } catch (erro) {
+        cache.delete(colecao);
+        throw erro;
+    }
+}
+
+export async function listar(colecao) {
+    return [...await lerArquivo(colecao), ...lerLocal(colecao)];
+}
+
+export async function adicionar(colecao, registro) {
+    const todos = await listar(colecao);
+    const id = todos.reduce((maior, item) => Math.max(maior, Number(item.id) || 0), 0) + 1;
+    const novo = { id, ...registro };
+    const locais = lerLocal(colecao);
+    locais.push(novo);
+    localStorage.setItem(chave(colecao), JSON.stringify(locais));
+    return novo;
+}

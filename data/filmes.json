@@ -1,7 +1,6 @@
 [
     {
         "id": 1,
-        "cidade": "Cascavel",
         "nome": "Street Fighter",
         "classificacao": "14 anos",
         "genero": "Ação",
@@ -11,41 +10,10 @@
         "elenco": "Noah Centineo, 50 Cents, Callina Liang, David Dastmalchian, Jason Momoa, Andrew Koji",
         "sinopse": "A adaptação de um dos jogos mais populares dos anos 90 está chegando nos cinemas! Ambientado em 1993, os lutadores Ryu (Andrew Koji) e Ken Masters (Noah Centineo) são colocados de volta no combate quando a misteriosa Chun-Li (Callina Liang) os recruta para o próximo World Warrior Tournament: uma brutal luta de socos, destino e fúria. Entretanto, por trás desse campeonato, se esconde uma conspiração mortal que os força a encarar um ao outro e os demônios do passado. E se eles não fizerem, o game over! Dirigido por Kitao Sakurai, \"Street Fighter\" promete trazer as lutas dos videogames para as telonas com Hadoukens, roundhouses e todos os personagens favoritos da franquia. O filme chega aos cinemas no dia 15 de Outubro.",
         "imageurl": "https://picsum.photos/seed/street-fighter/400/478",
-        "banner": "https://picsum.photos/seed/street-fighter-banner/1600/600",
-        "uf": "PR",
-        "estacionamento": "Estacionamento Y",
-        "endereco": "Av. Brasil, 5800 - Centro",
-        "sessoes": {
-            "mes": "2026-11",
-            "dias": [
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15
-            ]
-        },
-        "horarios": [
-            "18:00",
-            "20:30",
-            "23:00"
-        ],
-        "ingressos": [
-            {
-                "tipo": "Inteira",
-                "preco": 50
-            },
-            {
-                "tipo": "Meia-entrada",
-                "preco": 25
-            }
-        ]
+        "banner": "https://picsum.photos/seed/street-fighter-banner/1600/600"
     },
     {
         "id": 2,
-        "cidade": "Cascavel",
         "nome": "O Último Horizonte",
         "classificacao": "12 anos",
         "genero": "Ficção",
@@ -55,40 +23,10 @@
         "elenco": "Mariana Lima, Rodrigo Santoro, Alice Braga, Wagner Moura",
         "sinopse": "Uma equipe de astronautas brasileiros parte na primeira missão tripulada a Marte. Quando a comunicação com a Terra é cortada, eles precisam decidir entre voltar para casa ou seguir em frente sabendo que talvez nunca mais sejam resgatados.",
         "imageurl": "https://picsum.photos/seed/ultimo-horizonte/400/478",
-        "banner": "https://picsum.photos/seed/ultimo-horizonte-banner/1600/600",
-        "uf": "PR",
-        "estacionamento": "Estacionamento Y",
-        "endereco": "Av. Brasil, 5800 - Centro",
-        "sessoes": {
-            "mes": "2026-11",
-            "dias": [
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15
-            ]
-        },
-        "horarios": [
-            "19:00",
-            "21:45"
-        ],
-        "ingressos": [
-            {
-                "tipo": "Inteira",
-                "preco": 50
-            },
-            {
-                "tipo": "Meia-entrada",
-                "preco": 25
-            }
-        ]
+        "banner": "https://picsum.photos/seed/ultimo-horizonte-banner/1600/600"
     },
     {
         "id": 3,
-        "cidade": "Cascavel",
         "nome": "Riso Solto",
         "classificacao": "Livre",
         "genero": "Comédia",
@@ -98,42 +36,10 @@
         "elenco": "Paulo Gustavo, Ingrid Guimarães, Fabiana Karla, Katiuscia Canoro",
         "sinopse": "Um comediante em crise de criatividade aceita apresentar-se em um casamento no interior. O que parecia um trabalho fácil vira uma noite de confusões quando o noivo descobre que a noiva é sua ex-namorada.",
         "imageurl": "https://picsum.photos/seed/riso-solto/400/478",
-        "banner": "https://picsum.photos/seed/riso-solto-banner/1600/600",
-        "uf": "PR",
-        "estacionamento": "Estacionamento Y",
-        "endereco": "Av. Brasil, 5800 - Centro",
-        "sessoes": {
-            "mes": "2026-11",
-            "dias": [
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15
-            ]
-        },
-        "horarios": [
-            "17:30",
-            "19:30",
-            "21:30",
-            "23:30"
-        ],
-        "ingressos": [
-            {
-                "tipo": "Inteira",
-                "preco": 50
-            },
-            {
-                "tipo": "Meia-entrada",
-                "preco": 25
-            }
-        ]
+        "banner": "https://picsum.photos/seed/riso-solto-banner/1600/600"
     },
     {
         "id": 4,
-        "cidade": "Toledo",
         "nome": "Noite Sem Fim",
         "classificacao": "16 anos",
         "genero": "Suspense",
@@ -143,40 +49,10 @@
         "elenco": "Fernanda Montenegro, Selton Mello, Dira Paes, Seu Jorge",
         "sinopse": "Uma cidade do interior fica isolada após uma tempestade. Durante a madrugada, moradores começam a desaparecer um a um, e uma delegada aposentada precisa descobrir quem — ou o quê — está por trás disso.",
         "imageurl": "https://picsum.photos/seed/noite-sem-fim/400/478",
-        "banner": "https://picsum.photos/seed/noite-sem-fim-banner/1600/600",
-        "uf": "PR",
-        "estacionamento": "Estacionamento X",
-        "endereco": "R. Santos Dumont, 2626 - Vila Industrial",
-        "sessoes": {
-            "mes": "2026-11",
-            "dias": [
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15
-            ]
-        },
-        "horarios": [
-            "20:00",
-            "22:30"
-        ],
-        "ingressos": [
-            {
-                "tipo": "Inteira",
-                "preco": 50
-            },
-            {
-                "tipo": "Meia-entrada",
-                "preco": 25
-            }
-        ]
+        "banner": "https://picsum.photos/seed/noite-sem-fim-banner/1600/600"
     },
     {
         "id": 5,
-        "cidade": "Cascavel",
         "nome": "Pé de Serra",
         "classificacao": "10 anos",
         "genero": "Drama",
@@ -186,40 +62,10 @@
         "elenco": "Caio Blat, Sophie Charlotte, Jesuíta Barbosa, Bárbara Paz",
         "sinopse": "Dois irmãos herdam a fazenda da família no sertão e precisam lidar com a seca, as dívidas e um segredo guardado pelo pai por mais de trinta anos.",
         "imageurl": "https://picsum.photos/seed/pe-de-serra/400/478",
-        "banner": "https://picsum.photos/seed/pe-de-serra-banner/1600/600",
-        "uf": "PR",
-        "estacionamento": "Estacionamento Y",
-        "endereco": "Av. Brasil, 5800 - Centro",
-        "sessoes": {
-            "mes": "2026-11",
-            "dias": [
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15
-            ]
-        },
-        "horarios": [
-            "18:30",
-            "21:00"
-        ],
-        "ingressos": [
-            {
-                "tipo": "Inteira",
-                "preco": 50
-            },
-            {
-                "tipo": "Meia-entrada",
-                "preco": 25
-            }
-        ]
+        "banner": "https://picsum.photos/seed/pe-de-serra-banner/1600/600"
     },
     {
         "id": 6,
-        "cidade": "Toledo",
         "nome": "Contos do Amanhã",
         "classificacao": "Livre",
         "genero": "Animação",
@@ -229,41 +75,10 @@
         "elenco": "Aline Wirley, Rodrigo Lombardi, Marcelo Serrado",
         "sinopse": "Em um mundo onde as histórias estão desaparecendo, uma menina e um rato falante viajam por reinos esquecidos para devolver a imaginação às pessoas.",
         "imageurl": "https://picsum.photos/seed/contos-do-amanha/400/478",
-        "banner": "https://picsum.photos/seed/contos-do-amanha-banner/1600/600",
-        "uf": "PR",
-        "estacionamento": "Estacionamento X",
-        "endereco": "R. Santos Dumont, 2626 - Vila Industrial",
-        "sessoes": {
-            "mes": "2026-11",
-            "dias": [
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15
-            ]
-        },
-        "horarios": [
-            "16:00",
-            "18:00",
-            "20:00"
-        ],
-        "ingressos": [
-            {
-                "tipo": "Inteira",
-                "preco": 50
-            },
-            {
-                "tipo": "Meia-entrada",
-                "preco": 25
-            }
-        ]
+        "banner": "https://picsum.photos/seed/contos-do-amanha-banner/1600/600"
     },
     {
         "id": 7,
-        "cidade": "Toledo",
         "nome": "Maré Alta",
         "classificacao": "12 anos",
         "genero": "Aventura",
@@ -273,41 +88,10 @@
         "elenco": "Bruna Marquezine, Chay Suede, Zezé Motta",
         "sinopse": "Um grupo de jovens pescadores encontra um mapa antigo dentro de um barco naufragado e decide seguir as pistas antes que a marina transforme a vila em resort.",
         "imageurl": "https://picsum.photos/seed/mare-alta/400/478",
-        "banner": "https://picsum.photos/seed/mare-alta-banner/1600/600",
-        "uf": "PR",
-        "estacionamento": "Estacionamento X",
-        "endereco": "R. Santos Dumont, 2626 - Vila Industrial",
-        "sessoes": {
-            "mes": "2026-11",
-            "dias": [
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15
-            ]
-        },
-        "horarios": [
-            "19:15",
-            "21:45",
-            "23:59"
-        ],
-        "ingressos": [
-            {
-                "tipo": "Inteira",
-                "preco": 50
-            },
-            {
-                "tipo": "Meia-entrada",
-                "preco": 25
-            }
-        ]
+        "banner": "https://picsum.photos/seed/mare-alta-banner/1600/600"
     },
     {
         "id": 8,
-        "cidade": "Toledo",
         "nome": "Coração de Ferro",
         "classificacao": "14 anos",
         "genero": "Romance",
@@ -317,34 +101,6 @@
         "elenco": "Grazi Massafera, Rodrigo Hilbert, Letícia Colin, Fabrício Boliveira",
         "sinopse": "Uma mecânica e um piloto de rally se conhecem em uma oficina no interior de Minas. Entre corridas clandestinas e um passado que insiste em voltar, os dois descobrem que consertar motores é mais fácil do que consertar sentimentos.",
         "imageurl": "https://picsum.photos/seed/coracao-de-ferro/400/478",
-        "banner": "https://picsum.photos/seed/coracao-de-ferro-banner/1600/600",
-        "uf": "PR",
-        "estacionamento": "Estacionamento X",
-        "endereco": "R. Santos Dumont, 2626 - Vila Industrial",
-        "sessoes": {
-            "mes": "2026-11",
-            "dias": [
-                9,
-                10,
-                11,
-                12,
-                13
-            ]
-        },
-        "horarios": [
-            "18:45",
-            "21:15",
-            "23:30"
-        ],
-        "ingressos": [
-            {
-                "tipo": "Inteira",
-                "preco": 50
-            },
-            {
-                "tipo": "Meia-entrada",
-                "preco": 25
-            }
-        ]
+        "banner": "https://picsum.photos/seed/coracao-de-ferro-banner/1600/600"
     }
 ]

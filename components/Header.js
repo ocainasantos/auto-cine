@@ -1,7 +1,9 @@
 import { deTemplate } from "./dom.js";
 import { FiltroCidade } from "./FiltroCidade.js";
+import { SugestoesBusca } from "./SugestoesBusca.js";
 
-export function Header({ logoHref = "#/", onBusca, filtro } = {}) {
+// sugerir(termo) e aoEscolher(evento) ativam a lista de sugestões abaixo da busca.
+export function Header({ logoHref = "#/", onBusca, sugerir, aoEscolher, filtro } = {}) {
     const header = deTemplate(`
         <header class="site-header">
             <div class="header-inner container">
@@ -25,6 +27,7 @@ export function Header({ logoHref = "#/", onBusca, filtro } = {}) {
 
     const input = header.querySelector(".search-input");
     if (onBusca) input.addEventListener("input", () => onBusca(input.value.trim()));
+    if (sugerir && aoEscolher) header.querySelector(".search").append(SugestoesBusca({ input, sugerir, aoEscolher }));
 
     header.querySelector(".header-inner").append(filtro ?? FiltroCidade());
     return header;

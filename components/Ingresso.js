@@ -1,5 +1,6 @@
 import { criar, deTemplate } from "./dom.js";
 import { abrirModalCompra } from "./ModalCompra.js";
+import { vendidosPorSessao, registrarCompra } from "../js/dados.js";
 
 const MESES = ["Jan.", "Fev.", "Mar.", "Abr.", "Mai.", "Jun.", "Jul.", "Ago.", "Set.", "Out.", "Nov.", "Dez."];
 const SEMANA = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
@@ -56,6 +57,16 @@ export function Ingresso({ filme }) {
     });
     selecionar(datas.firstElementChild);
 
-    continuar.addEventListener("click", () => abrirModalCompra({ filme, data: selecionada, origem: continuar }));
+    continuar.addEventListener("click", async () => {
+        const vendidos = await vendidosPorSessao(filme.id);
+        const data = selecionada;
+        abrirModalCompra({
+            filme,
+            data,
+            vendidos,
+            origem: continuar,
+            aoConfirmar: dados => registrarCompra({ evento: filme, data, ...dados }),
+        });
+    });
     return secao;
 }
