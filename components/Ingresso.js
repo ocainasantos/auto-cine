@@ -1,4 +1,5 @@
 import { criar, deTemplate } from "./dom.js";
+import { abrirModalCompra } from "./ModalCompra.js";
 
 const MESES = ["Jan.", "Fev.", "Mar.", "Abr.", "Mai.", "Jun.", "Jul.", "Ago.", "Set.", "Out.", "Nov.", "Dez."];
 const SEMANA = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
@@ -33,16 +34,28 @@ export function Ingresso({ filme }) {
     secao.querySelector(".ingresso__local").textContent = `${filme.estacionamento} (${local})`;
 
     const datas = secao.querySelector(".ingresso__datas");
+    const continuar = secao.querySelector(".ingresso__continuar");
     if (!filme.sessoes.length) {
         datas.append(criar("p", "ingresso__vazio", "Nenhuma sessão disponível."));
+        continuar.disabled = true;
         return secao;
     }
 
+    const botoes = new Map();
+    let selecionada = null;
+
     function selecionar(botao) {
+        selecionada = botoes.get(botao);
         datas.querySelectorAll(".ingresso__data").forEach(b => b.setAttribute("aria-pressed", String(b === botao)));
     }
 
-    datas.append(...filme.sessoes.map(data => BotaoData({ data, aoSelecionar: selecionar })));
+    filme.sessoes.forEach(data => {
+        const botao = BotaoData({ data, aoSelecionar: selecionar });
+        botoes.set(botao, data);
+        datas.append(botao);
+    });
     selecionar(datas.firstElementChild);
+
+    continuar.addEventListener("click", () => abrirModalCompra({ filme, data: selecionada, origem: continuar }));
     return secao;
 }

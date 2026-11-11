@@ -17,8 +17,31 @@
         "endereco": "Av. Brasil, 5800 - Centro",
         "sessoes": {
             "mes": "2026-11",
-            "dias": [ 9, 10, 11, 12, 13, 14, 15 ]
-        }
+            "dias": [
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15
+            ]
+        },
+        "horarios": [
+            "18:00",
+            "20:30",
+            "23:00"
+        ],
+        "ingressos": [
+            {
+                "tipo": "Inteira",
+                "preco": 50
+            },
+            {
+                "tipo": "Meia-entrada",
+                "preco": 25
+            }
+        ]
     },
     {
         "id": 2,
@@ -38,8 +61,30 @@
         "endereco": "Av. Brasil, 5800 - Centro",
         "sessoes": {
             "mes": "2026-11",
-            "dias": [ 9, 10, 11, 12, 13, 14, 15 ]
-        }
+            "dias": [
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15
+            ]
+        },
+        "horarios": [
+            "19:00",
+            "21:45"
+        ],
+        "ingressos": [
+            {
+                "tipo": "Inteira",
+                "preco": 50
+            },
+            {
+                "tipo": "Meia-entrada",
+                "preco": 25
+            }
+        ]
     },
     {
         "id": 3,
@@ -59,8 +104,32 @@
         "endereco": "Av. Brasil, 5800 - Centro",
         "sessoes": {
             "mes": "2026-11",
-            "dias": [ 9, 10, 11, 12, 13, 14, 15 ]
-        }
+            "dias": [
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15
+            ]
+        },
+        "horarios": [
+            "17:30",
+            "19:30",
+            "21:30",
+            "23:30"
+        ],
+        "ingressos": [
+            {
+                "tipo": "Inteira",
+                "preco": 50
+            },
+            {
+                "tipo": "Meia-entrada",
+                "preco": 25
+            }
+        ]
     },
     {
         "id": 4,
@@ -80,8 +149,30 @@
         "endereco": "R. Santos Dumont, 2626 - Vila Industrial",
         "sessoes": {
             "mes": "2026-11",
-            "dias": [ 9, 10, 11, 12, 13, 14, 15 ]
-        }
+            "dias": [
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15
+            ]
+        },
+        "horarios": [
+            "20:00",
+            "22:30"
+        ],
+        "ingressos": [
+            {
+                "tipo": "Inteira",
+                "preco": 50
+            },
+            {
+                "tipo": "Meia-entrada",
+                "preco": 25
+            }
+        ]
     },
     {
         "id": 5,
@@ -101,8 +192,30 @@
         "endereco": "Av. Brasil, 5800 - Centro",
         "sessoes": {
             "mes": "2026-11",
-            "dias": [ 9, 10, 11, 12, 13, 14, 15 ]
-        }
+            "dias": [
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15
+            ]
+        },
+        "horarios": [
+            "18:30",
+            "21:00"
+        ],
+        "ingressos": [
+            {
+                "tipo": "Inteira",
+                "preco": 50
+            },
+            {
+                "tipo": "Meia-entrada",
+                "preco": 25
+            }
+        ]
     },
     {
         "id": 6,
@@ -122,8 +235,31 @@
         "endereco": "R. Santos Dumont, 2626 - Vila Industrial",
         "sessoes": {
             "mes": "2026-11",
-            "dias": [ 9, 10, 11, 12, 13, 14, 15 ]
-        }
+            "dias": [
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15
+            ]
+        },
+        "horarios": [
+            "16:00",
+            "18:00",
+            "20:00"
+        ],
+        "ingressos": [
+            {
+                "tipo": "Inteira",
+                "preco": 50
+            },
+            {
+                "tipo": "Meia-entrada",
+                "preco": 25
+            }
+        ]
     },
     {
         "id": 7,
@@ -143,8 +279,31 @@
         "endereco": "R. Santos Dumont, 2626 - Vila Industrial",
         "sessoes": {
             "mes": "2026-11",
-            "dias": [ 9, 10, 11, 12, 13, 14, 15 ]
-        }
+            "dias": [
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15
+            ]
+        },
+        "horarios": [
+            "19:15",
+            "21:45",
+            "23:59"
+        ],
+        "ingressos": [
+            {
+                "tipo": "Inteira",
+                "preco": 50
+            },
+            {
+                "tipo": "Meia-entrada",
+                "preco": 25
+            }
+        ]
     },
     {
         "id": 8,
@@ -164,7 +323,28 @@
         "endereco": "R. Santos Dumont, 2626 - Vila Industrial",
         "sessoes": {
             "mes": "2026-11",
-            "dias": [ 9, 10, 11, 12, 13 ]
-        }
+            "dias": [
+                9,
+                10,
+                11,
+                12,
+                13
+            ]
+        },
+        "horarios": [
+            "18:45",
+            "21:15",
+            "23:30"
+        ],
+        "ingressos": [
+            {
+                "tipo": "Inteira",
+                "preco": 50
+            },
+            {
+                "tipo": "Meia-entrada",
+                "preco": 25
+            }
+        ]
     }
 ]

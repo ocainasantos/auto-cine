@@ -8,6 +8,8 @@ const ESTADOS = {
     SP: "São Paulo", SE: "Sergipe", TO: "Tocantins"
 };
 
+const HORARIO = /^([01]\d|2[0-3]):[0-5]\d$/;
+
 // "mes": "AAAA-MM", "dias": [1, 2, ...]; dias fora do mês são descartados.
 function lerSessoes(sessoes) {
     const [ano, mes] = String(sessoes?.mes || "").split("-").map(Number);
@@ -41,6 +43,12 @@ export class Filme {
         this.estacionamento = dados.estacionamento || "";
         this.endereco = dados.endereco || "";
         this.sessoes = lerSessoes(dados.sessoes);
+        this.horarios = [...new Set((dados.horarios || []).map(String))]
+            .filter(h => HORARIO.test(h))
+            .sort();
+        this.ingressos = (dados.ingressos || [])
+            .filter(i => i && typeof i.tipo === "string" && i.tipo.trim() && Number.isFinite(Number(i.preco)) && Number(i.preco) >= 0)
+            .map(i => ({ tipo: i.tipo.trim(), preco: Number(i.preco) }));
     }
 
     get cidadeUf() { return this.uf ? `${this.cidade} - ${this.uf}` : this.cidade; }
